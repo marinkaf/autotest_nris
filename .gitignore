@@ -1,0 +1,5 @@
+env
+env3
+*.pyo
+*.pyc
+.vscode
