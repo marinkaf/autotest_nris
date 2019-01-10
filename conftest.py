@@ -8,6 +8,7 @@ from fixture.deposition import DepositionHelper
 
 @pytest.fixture(scope = "session")
 def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
+#Эта fixture будет выполняться перед каждым тестом
+    fixture = Application() #Инициализация fixture
+    request.addfinalizer(fixture.destroy) #Разрушаем fixture
     return fixture

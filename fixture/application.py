@@ -14,14 +14,14 @@ from fixture.katalog import KatalogHelper
 
 class Application:
 
-    def __init__(self, window_param = "--start-maximized"): #options = 
+    def __init__(self, window_param = "--start-maximized"): #Конструктор 
         options = webdriver.ChromeOptions()
         options.add_argument(window_param)
         self.browser = webdriver.Chrome(chrome_options = options)
         self.browser.implicitly_wait(10)
         self.deposition = DepositionHelper(self)
-        self.session = SessinHelper(self)
-        self.katalog = KatalogHelper(self)
+        self.session = SessinHelper(self) #Ссылки на другие вспомогательные классы
+        self.katalog = KatalogHelper(self) #Ссылки на другие вспомогательные классы
     
     def cookies(self):
         browser = self.browser
