@@ -9,7 +9,9 @@ class Registration_data:
 
 class Person_fl_data:
 
-    def __init__(self, phone_code, phone_number, surname, name, patronymic, birthday, passport_num, passport_date, passport_issued_by, passport_department, address, additional_communication, passport_file, passport_visa):
+    def __init__(self, phone_code, phone_number, surname, name, patronymic, birthday, passport_num, \
+        passport_date, passport_issued_by, passport_department, address, additional_communication, passport_file, passport_visa):
+
         self.phone_code = phone_code
         self.phone_number = phone_number
         self.surname = surname
