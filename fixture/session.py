@@ -7,17 +7,17 @@ class SessinHelper:
     def __init__(self, app):
         self.app = app
 
-    def logaut(self, username, password):
+    def logaut(self, Registration_data):
         browser = self.app.browser
         elem_login = browser.find_element_by_link_text('Войти')
         elem_login.click()
         # wait = WebDriverWait(browser, 20)
         elem_email = browser.find_element_by_id("email")
         elem_email.clear()
-        elem_email.send_keys(username)      
+        elem_email.send_keys(Registration_data.username)      
         elem_password = browser.find_element_by_id("password")
         elem_password.clear()
-        elem_password.send_keys(password)
+        elem_password.send_keys(Registration_data.password)
         elem_button_submit = browser.find_element_by_xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/form[1]/div[3]/button[1]")
         elem_button_submit.click()
         #try:
@@ -32,21 +32,24 @@ class SessinHelper:
         parent.click()
         # browser.find_element_by_xpath("//*[text()='Выйти']").click()
 
-    def openPersonalKabinet(self):
+    def openProfileMenu(self):
         browser = self.app.browser
         browser.find_element_by_xpath("//a[@class='header__user-link']").click()
 
+    def openPersonalKabinet(self):
+        browser = self.app.browser
         element = browser.find_element_by_xpath("//*[contains(text(), 'Личный кабинет')]")
         parent = element.find_element_by_xpath('..')
         parent.click()    
 
+    def openProfile(self):
+        browser = self.app.browser
+        element = browser.find_element_by_xpath("//*[contains(text(), 'Редактировать аккаунт')]")
+        parent = element.find_element_by_xpath('..')
+        parent.click()
 
     def registration(self, Registration_data):
         browser = self.app.browser
-        elem_login = browser.find_element_by_link_text('Войти')
-        elem_login.click()
-        # browser.find_element_by_link_text("Регистрация").click()
-        browser.find_element_by_xpath("//a[contains(text(),'Регистрация')]").click()
         elem_email = browser.find_element_by_id('email')
         elem_email.clear()
         elem_email.send_keys(Registration_data.username)
@@ -95,3 +98,23 @@ class SessinHelper:
 
         browser.find_element_by_xpath("//div[@class='app-form']//div[17]//div[1]//div[1]//div[1]//div[1]//div[2]//div[1]//div[1]//span[1]").sendFile("/home/marinka/Загрузки")
         browser.find_element_by_xpath("//div[@class='app-form']//div[18]//div[1]//div[1]//div[1]//div[1]//div[2]//div[1]//div[1]//span[1]").sendFile("/home/marinka/Загрузки")
+
+
+    def editProfile(self, Person_fl_data):
+        browser = self.app.browser
+        if Person_fl_data.phone_number is not None: #эта конструкция нужна, если мы хотим использовать функцию не для заполнения пустого профиля при регистрации, а для изменения данных у существующего
+            elem_phone_number = browser.find_elements_by_id('phone')
+            elem_phone_number.clear()
+            elem_phone_number.send_keys(Person_fl_data.phone_number)
+        if Person_fl_data.surname is not None:
+            elem_input_surname = browser.find_element_by_name('surname')
+            elem_input_surname.clear()
+            elem_input_surname.send_keys(Person_fl_data.surname)
+        #Ищем кнопку "Сохранить"
+        browser.find_element_by_xpath("//button[@type='submit']").click()
+        #Проверяем что форма отправлена на модерацию
+        browser.find_element_by_xpath("//h1[contains(text(),'Ваши данные проверяются модератором')]")
+
+    def clickOnLogo(self):
+        browser = self.app.browser
+        browser.find_element_by_class_name("profile-menu-wrapper profile-menu-wrapper--hidden").click()

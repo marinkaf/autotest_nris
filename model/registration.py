@@ -1,6 +1,6 @@
 class Registration_data:
     
-    def __init__(self, username, password, code):
+    def __init__(self, username=None, password=None, code=None):
         self.username = username
         self.password = password
         self.code = code
@@ -9,8 +9,21 @@ class Registration_data:
 
 class Person_fl_data:
 
-    def __init__(self, phone_code, phone_number, surname, name, patronymic, birthday, passport_num, \
-        passport_date, passport_issued_by, passport_department, address, additional_communication, passport_file, passport_visa):
+    def __init__(self, \
+            phone_code=None, \
+            phone_number=None, \
+            surname=None, \
+            name=None, \
+            patronymic=None, \
+            birthday=None, \
+            passport_num=None, \
+            passport_date=None, \
+            passport_issued_by=None, \
+            passport_department=None, \
+            address=None, \
+            additional_communication=None, \
+            passport_file=None, \
+            passport_visa=None):
 
         self.phone_code = phone_code
         self.phone_number = phone_number
